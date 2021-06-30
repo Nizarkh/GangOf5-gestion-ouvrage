@@ -1,19 +1,19 @@
 package com.Gangof5.ecommerce.model;
 
-import com.Gangof5.ecommerce.dto.product.BookDto;
-
-
+import com.Gangof5.ecommerce.dto.book.BookDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity
-@Table(name = "books")
+@Entity(name = "Book")
+@Table(name = "book")
 public class Book {
 	public Book(String fileName, String fileType, byte[] data){
 		
@@ -50,6 +50,8 @@ public Book(String isbn,String languages,String copyright,String subject,int pag
 
 }
  
+
+
 	public Book(String id, String fileName, String fileType, byte[] data, String isbn, String languages,
 			String copyright, String subject, int page_count, String author, List<Review> reviews) {
 		super();
@@ -179,12 +181,47 @@ public Book(String isbn,String languages,String copyright,String subject,int pag
 		return price;
 	}
 
+	public Book(String id, String fileName, String fileType, byte[] data, String isbn, String languages,
+			String copyright, String subject, int page_count, String author, List<Review> reviews, int price,
+			Category category) {
+		super();
+		this.id = id;
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.data = data;
+		this.isbn = isbn;
+		this.languages = languages;
+		this.copyright = copyright;
+		this.subject = subject;
+		this.page_count = page_count;
+		this.author = author;
+		this.reviews = reviews;
+		this.price = price;
+		this.category = category;
+		
+	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "category_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
 	Category category;
+	
+	  @OneToMany(
+		        mappedBy = "book",
+		        cascade = CascadeType.ALL,
+		        orphanRemoval = true
+		    )
+		    private List<BookUser> users = new ArrayList<>();
+	public List<BookUser> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<BookUser> users) {
+		this.users = users;
+	}
+	
 
 }

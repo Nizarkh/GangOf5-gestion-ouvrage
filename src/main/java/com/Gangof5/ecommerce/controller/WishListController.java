@@ -2,7 +2,7 @@ package com.Gangof5.ecommerce.controller;
 
 
 import com.Gangof5.ecommerce.common.ApiResponse;
-import com.Gangof5.ecommerce.dto.product.BookDto;
+import com.Gangof5.ecommerce.dto.book.BookDto;
 import com.Gangof5.ecommerce.model.Book;
 import com.Gangof5.ecommerce.model.User;
 import com.Gangof5.ecommerce.model.WishList;

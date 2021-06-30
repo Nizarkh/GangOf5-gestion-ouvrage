@@ -6,4 +6,5 @@ import com.Gangof5.ecommerce.model.Review;
 
 public interface ReviewRepository extends JpaRepository<Review,Integer> {
 
+	
 }

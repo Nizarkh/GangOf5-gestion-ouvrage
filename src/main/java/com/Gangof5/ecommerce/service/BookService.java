@@ -1,10 +1,10 @@
 package com.Gangof5.ecommerce.service;
 
-import com.Gangof5.ecommerce.dto.product.BookDto;
 import com.Gangof5.ecommerce.exceptions.ProductNotExistException;
 import com.Gangof5.ecommerce.model.Category;
 import com.Gangof5.ecommerce.model.Book;
 import com.Gangof5.ecommerce.repository.BookRepository;
+import com.Gangof5.ecommerce.dto.book.BookDto;
 import com.Gangof5.ecommerce.exceptions.*;
 
 
@@ -46,6 +46,7 @@ public class BookService implements IBookService{
 		book.setFileName(b.getFileName());
 		book.setFileType(b.getFileType());
 		book.setData(b.getData());
+		
 		bookRepository.save(book);
 		
 		return 99;
