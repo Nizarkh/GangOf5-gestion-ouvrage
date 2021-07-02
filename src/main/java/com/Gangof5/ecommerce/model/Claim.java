@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.Gangof5.ecommerce.enums.ClaimState;
+import com.Gangof5.ecommerce.enums.SubjectClaim;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -28,9 +29,11 @@ public class Claim {
 	@Column(name = "created_date")
     private LocalDateTime createdDate;
 	private LocalDateTime resolvedDate;
-	private String Subject;
+
+	private SubjectClaim Subject;
 	private String body;
 	private ClaimState claim_state;
+
 	
 	
 
@@ -40,17 +43,18 @@ public class Claim {
 		return resolvedDate;
 	}
 
-
-	public Claim(LocalDateTime createdDate, String subject, String body, ClaimState claim_state) {
+	public Claim(LocalDateTime createdDate,  SubjectClaim subject, String body,
+			ClaimState claim_state) {
 		super();
 		this.createdDate = createdDate;
 		Subject = subject;
 		this.body = body;
 		this.claim_state = claim_state;
-	}
-	
 
-	public Claim(LocalDateTime createdDate, LocalDateTime resolvedDate, String subject, String body, ClaimState claim_state) {
+	}
+
+
+	public Claim(LocalDateTime createdDate, LocalDateTime resolvedDate, SubjectClaim subject, String body, ClaimState claim_state) {
 		super();
 		this.createdDate = createdDate;
 		this.resolvedDate = resolvedDate;
@@ -109,11 +113,11 @@ public class Claim {
 		this.body = body;
 	}
 
-	public String getSubject() {
+	public SubjectClaim getSubject() {
 		return Subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(SubjectClaim subject) {
 		Subject = subject;
 	}
 
@@ -124,6 +128,9 @@ public class Claim {
 	public void setClaim_state(ClaimState claim_state) {
 		this.claim_state = claim_state;
 	}
+
+
+	
 	
 	
 }

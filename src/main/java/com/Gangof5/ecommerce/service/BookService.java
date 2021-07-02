@@ -1,21 +1,14 @@
 package com.Gangof5.ecommerce.service;
 
 import com.Gangof5.ecommerce.dto.product.BookDto;
-import com.Gangof5.ecommerce.exceptions.ProductNotExistException;
-import com.Gangof5.ecommerce.model.Category;
 import com.Gangof5.ecommerce.model.Book;
 import com.Gangof5.ecommerce.repository.BookRepository;
 import com.Gangof5.ecommerce.exceptions.*;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService implements IBookService{

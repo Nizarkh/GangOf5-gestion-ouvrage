@@ -1,18 +1,19 @@
 package com.Gangof5.ecommerce.dto.claim;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import com.Gangof5.ecommerce.enums.ClaimState;
+import com.Gangof5.ecommerce.enums.SubjectClaim;
 
 public class RequestClaimDto {
 
 	private LocalDateTime createdDate;
 	private LocalDateTime resolvedDate;
-	private String Subject;
+	private SubjectClaim Subject;
 	private String body;
 	private ClaimState claim_state;
 
+	
+	
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -37,11 +38,11 @@ public class RequestClaimDto {
 		this.resolvedDate = resolvedDate;
 	}
 
-	public String getSubject() {
+	public SubjectClaim getSubject() {
 		return Subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(SubjectClaim subject) {
 		Subject = subject;
 	}
 
@@ -52,5 +53,6 @@ public class RequestClaimDto {
 	public void setClaim_state(ClaimState claim_state) {
 		this.claim_state = claim_state;
 	}
+
 
 }

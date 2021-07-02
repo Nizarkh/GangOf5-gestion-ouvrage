@@ -19,6 +19,8 @@ import com.Gangof5.ecommerce.common.ApiResponse;
 import com.Gangof5.ecommerce.config.MessageResponse;
 import com.Gangof5.ecommerce.dto.claim.RequestClaimDto;
 import com.Gangof5.ecommerce.enums.ClaimState;
+import com.Gangof5.ecommerce.enums.Country;
+import com.Gangof5.ecommerce.enums.SubjectClaim;
 import com.Gangof5.ecommerce.model.Claim;
 import com.Gangof5.ecommerce.service.ClaimService;
 
@@ -52,8 +54,19 @@ public class ClaimController {
 		return new ResponseEntity<List<Claim>>(claims, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getClaimsBySubject")
+	public ResponseEntity<List<Claim>> getClaimsBySubject(@RequestParam("token") String token, 
+														@RequestParam("subject") SubjectClaim subject) {
+		List<Claim> claims = claimservice.ListClaimsBySubject(token, subject);
+		return new ResponseEntity<List<Claim>>(claims, HttpStatus.OK);
+	}
 	
-	
+	@GetMapping("/getClaimsByCountry")
+	public ResponseEntity<List<Claim>> getClaimsByCountry(@RequestParam("token") String token, 
+														@RequestParam("country") String country) {
+		List<Claim> claims = claimservice.ListClaimsByCountry(token, country);
+		return new ResponseEntity<List<Claim>>(claims, HttpStatus.OK);
+	}
 	
 	@GetMapping("/getClaim")
 	public Optional<Claim> getClaim(@RequestParam("token") String token, @RequestParam("idclaim") Integer idclaim ) {
@@ -83,6 +96,27 @@ public class ClaimController {
 	public MessageResponse SetClaimAsResolved(@RequestParam("token") String token, @RequestParam("idclaim") Integer idclaim ) {
 	
 		 return claimservice.SetClaimAsResolved(token, idclaim);
+	}
+	
+	@PostMapping("/CustomerComplaintRate")
+	public MessageResponse CustomerComplaintRate(	@RequestParam("token") String token,
+													@RequestParam("subjectclaim") SubjectClaim subjectclaim ) {
+	
+		 return claimservice.CustomerComplaintRate(token, subjectclaim);
+	}
+	
+	@GetMapping("/ComplaintsResponseRate")
+	public MessageResponse ComplaintsResponseRate(	@RequestParam("token") String token) {
+													
+	
+		 return claimservice.ComplaintsResponseRate(token);
+	}
+	
+	
+	@GetMapping("/Average")
+	public MessageResponse Average(	@RequestParam("token") String token) {											
+	
+		 return claimservice.Average(token);
 	}
 	
 	
