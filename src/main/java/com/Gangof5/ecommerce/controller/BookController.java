@@ -1,7 +1,7 @@
 package com.Gangof5.ecommerce.controller;
 
 import com.Gangof5.ecommerce.common.ApiResponse;
-import com.Gangof5.ecommerce.dto.product.BookDto;
+import com.Gangof5.ecommerce.dto.book.BookDto;
 import com.Gangof5.ecommerce.model.Book;
 import com.Gangof5.ecommerce.model.Category;
 import com.Gangof5.ecommerce.service.CategoryService;
@@ -28,6 +28,8 @@ import java.util.Optional;
 public class BookController {
 	
     @Autowired BookService bookService;
+    
+    //localhost:8080/Book/uploadFile/
     @PostMapping("/uploadFile/")
 	public UploadBookResponse uploadBook(@RequestParam("file") MultipartFile file) {
 
@@ -42,9 +44,11 @@ public class BookController {
 	public int FormulaireToFile(@PathVariable("id") String id,@RequestBody Book book) {
 
 		bookService.AffecterFileFormulaire(id, book);
+		bookService.deleteBook(id);
+		
 		return 99;
 	}
-	
+	//localhost:8080/Book/getBook/76d5072c-a7d8-46ee-9f40-2e2db6fc7323
 	@GetMapping("/getBook/{id}")
 	public ResponseEntity<Resource> GetBook(@PathVariable("id") String id){
 		Book book= bookService.getBook(id);
@@ -53,7 +57,7 @@ public class BookController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + book.getFileName() + "\"")
                 .body(new ByteArrayResource(book.getData()));
 	}
-	
+	//localhost:8080/Book/getAllBooks
 	@GetMapping("/getAllBooks")
 	public List<Book> getAllBooks(){
 		return  bookService.getAllBooks();
