@@ -60,5 +60,4 @@ public class BookUserId implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-
 }

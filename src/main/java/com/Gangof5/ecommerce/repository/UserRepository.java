@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query("select DISTINCT u from User u where u.role=:role")
     List<User> findByRole(@Param("role") Role role);
+    
+    @Query("SELECT e FROM User e JOIN e.review b WHERE b.id=:id ")
+	List<User> listeDeUsersParIdReview(@Param("id") int id);
 }

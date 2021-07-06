@@ -75,5 +75,4 @@ public class BookUser {
 	        return Objects.hash(book, user);
 	    }
 
-
 }

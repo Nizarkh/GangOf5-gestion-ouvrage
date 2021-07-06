@@ -41,9 +41,9 @@ public class BookController {
 	}
 	
 	@PostMapping("/FormulaireToFile/{id}")
-	public int FormulaireToFile(@PathVariable("id") String id,@RequestBody Book book) {
+	public int FormulaireToFile(@PathVariable("id") String id,@RequestBody Book book,@RequestParam("token") String token) {
 
-		bookService.AffecterFileFormulaire(id, book);
+		bookService.AffecterFileFormulaire(id, book,token);
 		bookService.deleteBook(id);
 		
 		return 99;
@@ -71,6 +71,8 @@ public class BookController {
 		
 	}
 	
+	
+
 	
 
 	

@@ -1,10 +1,14 @@
 package com.Gangof5.ecommerce.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Review {
@@ -23,7 +27,7 @@ public class Review {
 	private String content;
 	private int rating;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Book book;
 
 	public String getContent() {
@@ -58,5 +62,30 @@ public class Review {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@OneToMany
+	private List<User> users;
+
+
+	public Review(int id, String content, int rating, Book book, List<User> users) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.rating = rating;
+		this.book = book;
+		this.users = users;
+	}
+	public Review( String content, int rating, Book book, List<User> users) {
+		super();
 	
+		this.content = content;
+		this.rating = rating;
+		this.book = book;
+		this.users = users;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 }

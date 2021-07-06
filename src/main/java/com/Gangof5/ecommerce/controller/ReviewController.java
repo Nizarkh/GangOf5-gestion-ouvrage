@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Gangof5.ecommerce.model.Review;
@@ -25,15 +26,15 @@ public class ReviewController {
 	ReviewService reviewServie;
 	//http://localhost:8080/Review/AddReview/76d5072c-a7d8-46ee-9f40-2e2db6fc7323
 	@PostMapping("/AddReview/{bookId}")
-	public Review AddReview(@PathVariable String bookId, @RequestBody Review review) {
+	public Review AddReview(@PathVariable String bookId, @RequestBody Review review,@RequestParam("token") String token) {
 
-		return reviewServie.AddReview(bookId, review);
+		return reviewServie.AddReview(bookId, review, token);
 	}
 	//http://localhost:8080/Review/GetReview/2
 	@GetMapping("/GetReview/{idReview}")
-	public Review GetReview(@PathVariable int idReview) {
+	public Review GetReview(@PathVariable int idReview,@RequestParam("token") String token) {
 
-		return reviewServie.DisplayReview(idReview);
+		return reviewServie.DisplayReview(idReview, token);
 	}
 	
 	//http://localhost:8080/Review/GetAllReviews
@@ -45,16 +46,16 @@ public class ReviewController {
 	}
 	//http://localhost:8080/Review/UpdateReview/2
 	@PutMapping("/UpdateReview/{idReview}")
-	public Review UpdateReview(@RequestBody Review r,@PathVariable int idReview) {
+	public Review UpdateReview(@RequestBody Review r,@PathVariable int idReview,@RequestParam("token") String token) {
 
-		return reviewServie.UpdateReview(r, idReview);
+		return reviewServie.UpdateReview(r, idReview, token);
 	}
 	
 	//http://localhost:8080/Review/DeleteReview/1
 	@DeleteMapping("/DeleteReview/{ReviewId}")
-	public int  AddReview(@PathVariable int ReviewId) {
+	public int  AddReview(@PathVariable int ReviewId,@RequestParam("token") String token) {
 
-		return reviewServie.RemoveReview(ReviewId);
+		return reviewServie.RemoveReview(ReviewId, token);
 	}
 
 

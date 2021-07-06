@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,42 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @ManyToOne
+    private Review review;
 
-    @Column(name = "first_name")
+    public User(Integer id, Review review, String firstName, String lastName, String email, Role role, String password,
+			List<Order> orders, List<Claim> claims, List<BookUser> books, Book bookAdded) {
+		super();
+		this.id = id;
+		this.review = review;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.role = role;
+		this.password = password;
+		this.orders = orders;
+		this.claims = claims;
+		this.books = books;
+		this.bookAdded = bookAdded;
+	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
+	public List<BookUser> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<BookUser> books) {
+		this.books = books;
+	}
+	@Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -188,6 +223,23 @@ public class User {
 
 	public void setClaims(List<Claim> claims) {
 		this.claims = claims;
+	}
+	@OneToMany(
+	        mappedBy = "user",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true
+	    )
+	    private List<BookUser> books = new ArrayList<>();
+	
+	@OneToOne
+	private Book bookAdded;
+
+	public Book getBookAdded() {
+		return bookAdded;
+	}
+
+	public void setBookAdded(Book bookAdded) {
+		this.bookAdded = bookAdded;
 	}
     
 }

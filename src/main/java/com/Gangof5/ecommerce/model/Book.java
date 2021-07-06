@@ -157,6 +157,7 @@ public Book(String isbn,String languages,String copyright,String subject,int pag
 
 	private String author;
 	@OneToMany
+	@JoinColumn(name = "id")
 	private List<Review> reviews;
 	
 	private int price;
@@ -219,9 +220,17 @@ public Book(String isbn,String languages,String copyright,String subject,int pag
 		return users;
 	}
 
+	public User getUserPrem() {
+		return userPrem;
+	}
+
+	public void setUserPrem(User userPrem) {
+		this.userPrem = userPrem;
+	}
+
 	public void setUsers(List<BookUser> users) {
 		this.users = users;
 	}
-	
-
+	@OneToOne
+	private User userPrem;
 }

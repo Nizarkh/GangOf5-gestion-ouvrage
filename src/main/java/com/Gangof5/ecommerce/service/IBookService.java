@@ -12,7 +12,7 @@ public interface IBookService {
 	
 	public Book getBook(String fileId);
 	public Book storeBook(MultipartFile file);
-	public int AffecterFileFormulaire(String id,Book book);
+	public int AffecterFileFormulaire(String id,Book book,String token);
 	public List<Book> getAllBooks();
 	public int deleteBook(String fielId);
 
