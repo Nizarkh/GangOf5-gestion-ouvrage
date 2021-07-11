@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.Gangof5.ecommerce.model.BadWord;
 import com.Gangof5.ecommerce.model.Comment;
+import com.Gangof5.ecommerce.model.Post;
 import com.Gangof5.ecommerce.repository.BadWordRepository;
 import com.Gangof5.ecommerce.repository.CommentRepository;
+import com.Gangof5.ecommerce.repository.PostRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,8 @@ public class CommentServiceImpl implements ICommentService {
     CommentRepository commentRepository;
     @Autowired
     BadWordRepository bwRepository;
-
+    @Autowired
+    PostRepository postRepository;
     @Override
     public List<Comment> retrieveAllComments() {
         return (List<Comment>) commentRepository.findAll();
@@ -29,8 +32,8 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public void deleteComment(String id) {
-        commentRepository.deleteById(Integer.parseInt(id));
+    public void deleteComment(int id) {
+        commentRepository.deleteById(id);
     }
 
     @Override
@@ -56,7 +59,13 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public Comment retrieveComment(String id) {
-        return commentRepository.findById(Integer.parseInt(id)).get();
+    public Comment retrieveComment(int id) {
+        return commentRepository.findById(id).get();
+    }
+    @Override
+    public List<Comment> getPostComments(int id)
+    {
+        Post p = postRepository.findById(id).get();
+        return p.getComments();
     }
 }

@@ -28,8 +28,8 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
-    public void deletePost(String id) {
-        postRepository.deleteById(Integer.parseInt(id));
+    public void deletePost(int id) {
+        postRepository.deleteById(id);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class PostServiceImpl implements IPostService{
     }
 
     @Override
-    public Post retrievePost(String id) {
-        Post p = postRepository.findById(Integer.parseInt(id)).get();
+    public Post retrievePost(int id) {
+        Post p = postRepository.findById(id).get();
         return p;
     }
 }

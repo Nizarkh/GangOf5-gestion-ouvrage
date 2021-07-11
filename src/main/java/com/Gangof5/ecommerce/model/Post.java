@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +27,11 @@ public class Post{
 	private User user;
 
 	@OneToMany(mappedBy="post")
-    @JsonIgnore
 	private List<Comment> comments;
 
+	@OneToMany(mappedBy="post")
+	private List<React> reacts;
+	
 	public int getId() {
 		return id;
 	}
@@ -72,10 +75,14 @@ public class Post{
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
-
-
+	public List<React> getReacts() {
+		return reacts;
+	}
+	public void setReacts(List<React> reacts) {
+		this.reacts = reacts;
+	}
 	public Post(int id, String text, String picture, Date creationDate, Boolean deleted, User user,
-				List<Comment> comments) {
+			List<Comment> comments, List<React> reacts) {
 		super();
 		this.id = id;
 		this.text = text;
@@ -84,10 +91,10 @@ public class Post{
 		this.deleted = deleted;
 		this.user = user;
 		this.comments = comments;
+		this.reacts = reacts;
 	}
 	public Post() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

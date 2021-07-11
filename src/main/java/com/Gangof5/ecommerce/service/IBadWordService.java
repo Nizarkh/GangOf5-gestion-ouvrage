@@ -7,7 +7,7 @@ import com.Gangof5.ecommerce.model.BadWord;
 public interface IBadWordService {
     List<BadWord> retrieveAllBadWords();
     BadWord addBadWord(BadWord c);
-    void deleteBadWord(String id);
+    void deleteBadWord(int id);
     BadWord updateBadWord(BadWord c);
-    BadWord retrieveBadWord(String id);
+    BadWord retrieveBadWord(int id);
 }

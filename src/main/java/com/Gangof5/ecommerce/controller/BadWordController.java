@@ -28,7 +28,7 @@ public class BadWordController {
     @DeleteMapping("/api/badwords/delete/{id}")
     @ResponseBody
     public void  deleteComment (@PathVariable("id")String id){
-        badWordService.deleteBadWord(id);
+        badWordService.deleteBadWord(Integer.parseInt(id));
     }
 
     @GetMapping("/api/badwords/all")

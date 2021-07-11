@@ -24,8 +24,8 @@ public class BadWordServiceImpl implements IBadWordService{
     }
 
     @Override
-    public void deleteBadWord(String id) {
-        badwordRepository.deleteById(Integer.parseInt(id));
+    public void deleteBadWord(int id) {
+        badwordRepository.deleteById(id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class BadWordServiceImpl implements IBadWordService{
     }
 
     @Override
-    public BadWord retrieveBadWord(String id) {
-        return badwordRepository.findById(Integer.parseInt(id)).get();
+    public BadWord retrieveBadWord(int id) {
+        return badwordRepository.findById(id).get();
     }
 }

@@ -7,7 +7,7 @@ import com.Gangof5.ecommerce.model.Post;
 public interface IPostService {
     List<Post> retrieveAllPosts();
     Post addPost(Post c);
-    void deletePost(String id);
+    void deletePost(int id);
     Post updatePost(Post c);
-    Post retrievePost(String id);
+    Post retrievePost(int id);
 }
