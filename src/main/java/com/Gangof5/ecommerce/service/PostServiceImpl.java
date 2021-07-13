@@ -54,7 +54,7 @@ public class PostServiceImpl implements IPostService{
 
     @Override
     public Post retrievePost(int id) {
-        Post p = postRepository.findById(id).get();
+        Post p = (Post)postRepository.findById(id).get();
         return p;
     }
 }

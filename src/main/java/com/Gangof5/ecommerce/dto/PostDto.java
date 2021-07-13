@@ -1,43 +1,29 @@
-package com.Gangof5.ecommerce.model;
+package com.Gangof5.ecommerce.dto;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
-public class Post{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+public class PostDto {
 	private int id;
 	private String subject;
 	private String text;
 	private String picture;
 	private Date creationDate;
 	private Boolean deleted;
-	@ManyToOne
-	private User user;
-
-	@OneToMany(mappedBy="post")
-	private List<Comment> comments;
-
-	@OneToMany(mappedBy="post")
-	private List<React> reacts;
-	
+	private String byUser;
+	private int nbComments;
+	private int likes;
+	private int dislikes;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getSubject() {
 		return subject;
 	}
@@ -56,19 +42,6 @@ public class Post{
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public List<Comment> getComments() {
-		return comments;
-	}
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -81,14 +54,33 @@ public class Post{
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
-	public List<React> getReacts() {
-		return reacts;
+	public String getByUser() {
+		return byUser;
 	}
-	public void setReacts(List<React> reacts) {
-		this.reacts = reacts;
+	public void setByUser(String byUser) {
+		this.byUser = byUser;
 	}
-	public Post(int id,String subject, String text, String picture, Date creationDate, Boolean deleted, User user,
-			List<Comment> comments, List<React> reacts) {
+
+	public int getNbComments() {
+		return nbComments;
+	}
+	public void setNbComments(int nbComments) {
+		this.nbComments = nbComments;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+	public int getDislikes() {
+		return dislikes;
+	}
+	public void setDislikes(int dislikes) {
+		this.dislikes = dislikes;
+	}
+	public PostDto(int id,String subject, String text, String picture, Date creationDate, Boolean deleted, String byUser, int nbComments,
+			int likes, int dislikes) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -96,17 +88,14 @@ public class Post{
 		this.picture = picture;
 		this.creationDate = creationDate;
 		this.deleted = deleted;
-		this.user = user;
-		this.comments = comments;
-		this.reacts = reacts;
+		this.byUser = byUser;
+		this.nbComments = nbComments;
+		this.likes = likes;
+		this.dislikes = dislikes;
 	}
-	public Post() {
+	public PostDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
-
-
-}
 	
-
-
+}
