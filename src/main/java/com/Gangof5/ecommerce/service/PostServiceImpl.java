@@ -38,8 +38,15 @@ public class PostServiceImpl implements IPostService{
         return null;
     }
     @Override
-    public Post addPost(Post p) {
-        return  postRepository.save(p);
+    public Post addPost(Post p,String token) {
+    	AuthenticationToken authenticationToken = repository.findTokenByToken(token);
+        if (Helper.notNull(authenticationToken)) {
+            if (Helper.notNull(authenticationToken.getUser())) {
+                p.setUser(authenticationToken.getUser());
+                return  postRepository.save(p);
+            }
+        }
+        return null;
     }
 
     @Override

@@ -28,8 +28,8 @@ public class PostController {
 
     @PostMapping("/api/posts/add")
     @ResponseBody
-    public void addPost (@RequestBody Post p){
-        postService.addPost(p);
+    public void addPost (@RequestBody Post p,@RequestParam("token") String token){
+        postService.addPost(p,token);
     }
 
     @PutMapping("/api/posts/update")
@@ -91,7 +91,7 @@ public class PostController {
     		p.setText(post.getText());
     		p.setByUser(post.getUser().getFirstName()+" "+post.getUser().getLastName());
     		p.setSubject(post.getSubject());
-    		p.setComments(post.getComments().size());
+    		p.setNbComments(post.getComments().size());
     		int likes=0;
     		int dislikes=0;
     		for(React react:post.getReacts())

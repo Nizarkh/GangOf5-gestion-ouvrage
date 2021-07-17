@@ -3,12 +3,15 @@ package com.Gangof5.ecommerce.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Gangof5.ecommerce.model.AuthenticationToken;
 import com.Gangof5.ecommerce.model.BadWord;
 import com.Gangof5.ecommerce.model.Comment;
 import com.Gangof5.ecommerce.model.Post;
 import com.Gangof5.ecommerce.repository.BadWordRepository;
 import com.Gangof5.ecommerce.repository.CommentRepository;
 import com.Gangof5.ecommerce.repository.PostRepository;
+import com.Gangof5.ecommerce.repository.TokenRepository;
+import com.Gangof5.ecommerce.utils.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +24,23 @@ public class CommentServiceImpl implements ICommentService {
     BadWordRepository bwRepository;
     @Autowired
     PostRepository postRepository;
+    @Autowired
+    TokenRepository repository;
     @Override
     public List<Comment> retrieveAllComments() {
         return (List<Comment>) commentRepository.findAll();
     }
 
     @Override
-    public Comment addComment(Comment c) {
-        return checkBadWord(c);
+    public Comment addComment(Comment c,String token) {
+    	AuthenticationToken authenticationToken = repository.findTokenByToken(token);
+        if (Helper.notNull(authenticationToken)) {
+            if (Helper.notNull(authenticationToken.getUser())) {
+                c.setUser(authenticationToken.getUser());
+                return checkBadWord(c);
+            }
+        }
+        return null;
     }
 
     @Override

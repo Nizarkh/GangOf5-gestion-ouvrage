@@ -17,8 +17,8 @@ public class CommentController {
 
     @PostMapping("/api/comments/add")
     @ResponseBody
-    public void addComment (@RequestBody Comment c){
-        commentService.addComment(c);
+    public void addComment (@RequestBody Comment c,@RequestParam("token") String token){
+        commentService.addComment(c,token);
     }
 
     @PutMapping("/api/comments/update")
