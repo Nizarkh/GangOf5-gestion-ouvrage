@@ -1,5 +1,6 @@
 package com.Gangof5.ecommerce.dto;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
@@ -97,5 +98,12 @@ public class PostDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+    public static Comparator<PostDto> PostRate = new Comparator<PostDto>() {
+    	public int compare(PostDto post1,PostDto post2)
+        {
+            return post2.getLikes() -post1.getLikes();
+        }
+    };
+
 	
 }

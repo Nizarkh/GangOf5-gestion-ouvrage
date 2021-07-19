@@ -1,7 +1,9 @@
 package com.Gangof5.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -67,16 +69,66 @@ public class PostController {
 		p.setDislikes(dislikes);
 		return p;
     }
-    @GetMapping("/api/posts/all")
-    public List<Post> retrieveAllPosts() {
+    
+    @GetMapping("/api/posts/top")
+    public List<PostDto> getTopPosts() {
         List<Post> posts;
+        List<PostDto> postsList = new ArrayList<>();
         posts = postService.retrieveAllPosts();
-    	for (Post post:posts){
-    		post.setComments(null);
-    		post.setReacts(null);
+        for (Post post:posts){
+    		PostDto p = new PostDto();
+    		p.setId(post.getId());
+    		p.setCreationDate(post.getCreationDate());
+    		p.setDeleted(post.getDeleted());
+    		p.setPicture(post.getPicture());
+    		p.setText(post.getText());
+    		p.setByUser(post.getUser().getFirstName()+" "+post.getUser().getLastName());
+    		p.setSubject(post.getSubject());
+    		p.setNbComments(post.getComments().size());
+    		int likes=0;
+    		int dislikes=0;
+    		for(React react:post.getReacts())
+    			if(react.getIsLike())
+    				likes++;
+    			else
+    				dislikes++;
+    		p.setLikes(likes);
+    		p.setDislikes(dislikes);
+    		postsList.add(p);
         }
-        return posts;
+ 	   Collections.sort(postsList, PostDto.PostRate);
+        return postsList.stream().limit(5).collect(Collectors.toList());
     }
+    
+    @GetMapping("/api/posts/all")
+    public List<PostDto> retrieveAllPosts() {
+        List<Post> posts;
+        List<PostDto> postsList = new ArrayList<>();
+        posts = postService.retrieveAllPosts();
+        for (Post post:posts){
+    		PostDto p = new PostDto();
+    		p.setId(post.getId());
+    		p.setCreationDate(post.getCreationDate());
+    		p.setDeleted(post.getDeleted());
+    		p.setPicture(post.getPicture());
+    		p.setText(post.getText());
+    		p.setByUser(post.getUser().getFirstName()+" "+post.getUser().getLastName());
+    		p.setSubject(post.getSubject());
+    		p.setNbComments(post.getComments().size());
+    		int likes=0;
+    		int dislikes=0;
+    		for(React react:post.getReacts())
+    			if(react.getIsLike())
+    				likes++;
+    			else
+    				dislikes++;
+    		p.setLikes(likes);
+    		p.setDislikes(dislikes);
+    		postsList.add(p);
+        }
+        return postsList;
+    }
+    
     @GetMapping("/api/posts/my")
     public List<PostDto> getMyPosts(@RequestParam("token") String token) {
         List<Post> posts;
