@@ -19,7 +19,7 @@ public class Book {
 		
 		super();
 		this.fileName = fileName;
-		this.fileType = fileTypepppp;
+		this.fileType = fileType;
 		this.data = data;
 		
 	}
