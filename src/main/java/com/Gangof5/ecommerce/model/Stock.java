@@ -15,7 +15,6 @@ public class Stock  {
 	private String label;
 	private float price;
 	private int priority;
-	private int test;
 	
 	@ManyToOne
 	private Book book;
