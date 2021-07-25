@@ -19,7 +19,7 @@ public class StockService implements IStockService{
 	BookRepository bookRepository;
 	
 	@Override
-    public List<Stock> getStocks (String b) {
+    public List<Stock> getStocks (int b) {
 		Book book = bookRepository.findById(b).get();
         return  (List<Stock>)stockRepository.findByBook(book);
         
@@ -34,7 +34,7 @@ public class StockService implements IStockService{
 	        return  stockRepository.save(s);
 	    }
 	 @Override
-	    public void deleteStock(String id) {
-		 stockRepository.deleteById(Integer.parseInt(id));
+	    public void deleteStock(int id) {
+		 stockRepository.deleteById(id);
 	    }
 }

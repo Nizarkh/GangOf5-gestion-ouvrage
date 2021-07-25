@@ -10,10 +10,10 @@ import com.Gangof5.ecommerce.model.Book;
 
 public interface IBookService {
 	
-	public Book getBook(String fileId);
-	public Book storeBook(MultipartFile file);
-	public int AffecterFileFormulaire(String id,Book book,String token);
-	public List<Book> getAllBooks();
-	public int deleteBook(String fielId);
+public Book addBook(Book book);
+public Book updateBook(Book book,int idBook);
+public int deleteBook(int idBook);
+public List<Book> getAllBooks();
+public Book getBook(int idBook);
 
 }

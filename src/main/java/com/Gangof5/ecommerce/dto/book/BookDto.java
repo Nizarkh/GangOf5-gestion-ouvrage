@@ -4,7 +4,7 @@ import com.Gangof5.ecommerce.model.Book;
 
 public class BookDto {
 
-	private String id;
+	private int id;
 	private String name;
 
 	private int price;
@@ -75,11 +75,11 @@ public class BookDto {
 	public BookDto() {
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

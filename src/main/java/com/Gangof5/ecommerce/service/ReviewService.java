@@ -59,7 +59,7 @@ public class ReviewService implements IReviewService{
 	}
 
 	@Override
-	public Review AddReview(String IdBook, Review review, String token) {
+	public Review AddReview(int IdBook, Review review, String token) {
 		User user = authenticationService.getUser(token);
 		List<User> users = new ArrayList<User>();
 		users.add(user);
@@ -74,38 +74,38 @@ public class ReviewService implements IReviewService{
 	public int RemoveReview(int idReview, String token) {
 		User user = authenticationService.getUser(token);
 		// List<User> listeDeUsersParIdReview(@Param("id") int id);
-		List<User> users = userRepository.listeDeUsersParIdReview(user.getId());
+		//List<User> users = userRepository.listeDeUsersParIdReview(user.getId());
 		// if (user in users)
-		for (User user2 : users) {
-			if (user == user2)
+		//for (User user2 : users) {
+		//	if (user == user2)
 				reviewRepository.deleteById(idReview);
 
-		}
+		//}
 		// reviewRepository.deleteById(idReview);
 		return 60;
 	}
 
 	@Override
-	public Review UpdateReview(Review review, int idReview, String token) {
-		User user = authenticationService.getUser(token);
-		// List<User> listeDeUsersParIdReview(@Param("id") int id);
-		List<User> users = userRepository.listeDeUsersParIdReview(user.getId());
-		// if (user in users)
-		for (User user2 : users) {
-			if (user == user2) {
-				Review R = reviewRepository.getById(idReview);
-				R.setContent(review.getContent());
-				R.setRating(review.getRating());
-				reviewRepository.save(R);
-			}
-			// Review R=reviewRepository.getById(idReview);
-			// R.setContent(review.getContent());
-			// R.setRating(review.getRating());
-			// reviewRepository.save(R);
-			// return R;
+	public Review UpdateReview(Review review, int idReview) {
+		//User user = authenticationService.getUser(token);
+		// *List<User> listeDeUsersParIdReview(@Param("id") int id);
+		//List<User> users = userRepository.listeDeUsersParIdReview(user.getId());
+		// *if (user in users)
+//		for (User user2 : users) {
+//			if (user == user2) {
+//				Review R = reviewRepository.getById(idReview);
+//				R.setContent(review.getContent());
+//				R.setRating(review.getRating());
+//				reviewRepository.save(R);
+//			}
+			 Review R=reviewRepository.getById(idReview);
+			 R.setContent(review.getContent());
+			 R.setRating(review.getRating());
+			 reviewRepository.save(R);
+			 return R;
 
-		}
-		return review;
+		//}
+		//return review;
 	}
 
 	@Override

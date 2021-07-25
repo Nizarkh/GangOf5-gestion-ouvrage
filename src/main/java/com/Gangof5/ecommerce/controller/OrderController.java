@@ -31,7 +31,8 @@ public class OrderController {
 
     @Autowired
     private AuthenticationService authenticationService;
-
+    @Autowired
+    private CartService cartService;
 
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> placeOrder(@RequestParam("token") String token, @RequestParam("sessionId") String sessionId)
@@ -51,7 +52,16 @@ public class OrderController {
     }
 
     @PostMapping("/create-checkout-session")
-    public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList) throws StripeException {
+    public ResponseEntity<StripeResponse> checkoutList(@RequestParam("token") String token) throws StripeException {
+    	authenticationService.authenticate(token);
+        User user = authenticationService.getUser(token);
+        CartDto cartDto = cartService.listCartItems(user);
+    	List<CheckoutItemDto> checkoutItemDtoList = new ArrayList<CheckoutItemDto>();
+    	for(CartItemDto c : cartDto.getcartItems())
+    	{
+    		CheckoutItemDto ch= new CheckoutItemDto(c.getBook().getFileName(), c.getQuantity(), c.getBook().getPrice(), c.getBook().getId(), user.getId());
+    		checkoutItemDtoList.add(ch);
+    	}
         Session session = orderService.createSession(checkoutItemDtoList);
         StripeResponse stripeResponse = new StripeResponse(session.getId());
         return new ResponseEntity<StripeResponse>(stripeResponse,HttpStatus.OK);

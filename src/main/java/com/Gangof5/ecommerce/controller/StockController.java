@@ -27,7 +27,7 @@ public class StockController {
 	
 	@GetMapping("/getStocks/{id}")
 	    @ResponseBody
-	    public List<Stock> getStocks (@PathVariable("id")String id){
+	    public List<Stock> getStocks (@PathVariable("id") int id){
 	    	return stockService.getStocks(id);
 	    }
 
@@ -45,7 +45,7 @@ public class StockController {
 
     @DeleteMapping("/deleteStock/{id}")
     @ResponseBody
-    public void  deleteStock (@PathVariable("id")String id){
+    public void  deleteStock (@PathVariable("id")int id){
     	stockService.deleteStock(id);
     }
 

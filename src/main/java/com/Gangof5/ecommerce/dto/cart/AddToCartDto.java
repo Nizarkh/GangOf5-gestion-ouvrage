@@ -6,7 +6,7 @@ import com.Gangof5.ecommerce.model.Cart;
 
 public class AddToCartDto {
     private Integer id;
-    private  String bookId;
+    private  int bookId;
     private  Integer quantity;
 
     public AddToCartDto() {
@@ -23,13 +23,13 @@ public class AddToCartDto {
                 ",";
     }
 
-    public String getBookId() {
+    public int getBookId() {
 		return bookId;
 	}
 
 
 
-	public void setBookId(String bookId) {
+	public void setBookId(int bookId) {
 		this.bookId = bookId;
 	}
 

@@ -35,7 +35,8 @@ public class CartController {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
       //  Book product = bookService.getProductById(addToCartDto.getProductId());
-        Book book= bookService.getBook(addToCartDto.getBookId());
+        //Book book= bookService.getBook(addToCartDto.getBookId());
+        Book book=bookService.getBook(addToCartDto.getBookId());
         System.out.println("book to add"+  book.getFileName());
         cartService.addToCart(addToCartDto, book, user);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Added to cart"), HttpStatus.CREATED);
@@ -48,12 +49,13 @@ public class CartController {
         CartDto cartDto = cartService.listCartItems(user);
         return new ResponseEntity<CartDto>(cartDto,HttpStatus.OK);
     }
-    @PutMapping("/update/{cartItemId}")
+    @PutMapping("/update")
     public ResponseEntity<ApiResponse> updateCartItem(@RequestBody AddToCartDto cartDto,
                                                       @RequestParam("token") String token) throws AuthenticationFailException,ProductNotExistException {
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
         Book book = bookService.getBook(cartDto.getBookId());
+      //  Book book=bookService.getBook(cartDto.getId());
         cartService.updateCartItem(cartDto, user,book);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Product has been updated"), HttpStatus.OK);
     }
@@ -64,6 +66,13 @@ public class CartController {
         int userId = authenticationService.getUser(token).getId();
         cartService.deleteCartItem(itemID, userId);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
+    }
+    
+    @GetMapping("/{Id}")
+    public Cart getCartItem(@PathVariable("Id") Integer Id){
+       
+      
+        return  cartService.getCartID(Id);
     }
 
 }

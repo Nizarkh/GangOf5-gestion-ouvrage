@@ -26,7 +26,7 @@ public class ReviewController {
 	ReviewService reviewServie;
 	//http://localhost:8080/Review/AddReview/76d5072c-a7d8-46ee-9f40-2e2db6fc7323
 	@PostMapping("/AddReview/{bookId}")
-	public Review AddReview(@PathVariable String bookId, @RequestBody Review review,@RequestParam("token") String token) {
+	public Review AddReview(@PathVariable int bookId, @RequestBody Review review,@RequestParam("token") String token) {
 
 		return reviewServie.AddReview(bookId, review, token);
 	}
@@ -46,9 +46,12 @@ public class ReviewController {
 	}
 	//http://localhost:8080/Review/UpdateReview/2
 	@PutMapping("/UpdateReview/{idReview}")
-	public Review UpdateReview(@RequestBody Review r,@PathVariable int idReview,@RequestParam("token") String token) {
+	//public Review UpdateReview(@RequestBody Review r,@PathVariable int idReview,@RequestParam("token") String token) {
 
-		return reviewServie.UpdateReview(r, idReview, token);
+		public Review UpdateReview(@RequestBody Review r,@PathVariable int idReview) {
+
+
+		return reviewServie.UpdateReview(r, idReview);
 	}
 	
 	//http://localhost:8080/Review/DeleteReview/1

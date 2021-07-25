@@ -22,7 +22,7 @@ public class User {
     private Review review;
 
     public User(Integer id, Review review, String firstName, String lastName, String email, Role role, String password,
-			List<Order> orders, List<Claim> claims, List<BookUser> books, Book bookAdded) {
+			List<Order> orders, List<Claim> claims, Book bookAdded) {
 		super();
 		this.id = id;
 		this.review = review;
@@ -33,7 +33,7 @@ public class User {
 		this.password = password;
 		this.orders = orders;
 		this.claims = claims;
-		this.books = books;
+		
 		this.bookAdded = bookAdded;
 	}
 
@@ -45,13 +45,8 @@ public class User {
 		this.review = review;
 	}
 
-	public List<BookUser> getBooks() {
-		return books;
-	}
 
-	public void setBooks(List<BookUser> books) {
-		this.books = books;
-	}
+	
 	@Column(name = "first_name")
     private String firstName;
 
@@ -224,12 +219,7 @@ public class User {
 	public void setClaims(List<Claim> claims) {
 		this.claims = claims;
 	}
-	@OneToMany(
-	        mappedBy = "user",
-	        cascade = CascadeType.ALL,
-	        orphanRemoval = true
-	    )
-	    private List<BookUser> books = new ArrayList<>();
+	
 	
 	@OneToOne
 	private Book bookAdded;
