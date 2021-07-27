@@ -24,6 +24,22 @@ public class StockService implements IStockService{
         return  (List<Stock>)stockRepository.findByBook(book);
         
     }
+	
+	
+	@Override
+    public Stock getStock (int s) {
+		Stock stock = stockRepository.findById(s).get();
+        return stock;
+        
+    }
+	
+	@Override
+    public int countStocks (int b) {
+		Book book = bookRepository.findById(b).get();
+        return  stockRepository.findByBook(book).size();
+        
+    }
+	
 	 @Override
 	    public Stock createStock (Stock s) {
 		 
